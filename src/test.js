@@ -30,6 +30,7 @@ function test(msg) {
 }
 
 function connectAndWait() {
+  console.log(process.env.MY_IP);
   amqp
     .connect(`amqp://guest:guest@${process.env.MY_IP}:5672`)
     .then(function (conn) {
