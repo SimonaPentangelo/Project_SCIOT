@@ -12,12 +12,12 @@ var transporter = nodemailer.createTransport({
     }
   });
 
-function test(msg) {
+function sendMsg(result) {
   var mailOptions = {
     from: 'giuseppe9909@gmail.com',
     to: 'fabulart99@gmail.com',
     subject: 'Garage Handler Message',
-    text: msg.content.toString()
+    text: result
   };
   
   transporter.sendMail(mailOptions, function(error, info){
@@ -29,8 +29,20 @@ function test(msg) {
   });
 }
 
+function responseGenerator(val) {
+  var garage = parseInt(val.slice(0, 1));
+  var someone = parseInt(val.toString().slice(1, 2));
+
+  if(garage == 1) {
+    return "The garage is closed, I'll open it for you.";
+  } else if(garage == 0 && someone == 1) {
+    return "The garage is open, I can't close it, there's someone in my path...";
+  } else if(garage == 0 && someone == 0) {
+    return "The garage is open, I'll close it for you.";
+  }
+}
+
 function connectAndWait() {
-  //console.log(process.env);
   amqp
     .connect(`amqp://guest:guest@${process.env.MY_IP}:5672`)
     .then(function (conn) {
@@ -41,8 +53,9 @@ function connectAndWait() {
           return ch.consume(
             "iot/alerts",
             function (msg) {
-              test(msg);
-              console.log(msg.content)
+              console.log(msg.content.toString());
+              //var result = responseGenerator(msg.content.toString());
+              //sendMsg(result);
             },
             { noAck: true }
           );
