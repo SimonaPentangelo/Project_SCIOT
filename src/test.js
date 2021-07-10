@@ -48,7 +48,7 @@ function connectAndWait() {
         });
 
         return ok.then(function (_consumeOk) {
-          console.log(" *** Service status: ON ***");
+          console.log("*** Service status: ON ***");
         });
       });
     })

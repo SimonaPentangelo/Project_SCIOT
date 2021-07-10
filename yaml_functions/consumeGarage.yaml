@@ -1,12 +1,20 @@
 metadata:
+<<<<<<< HEAD
   name: consumeGarage
+=======
+  name: consumegarage
+>>>>>>> 63a0f1d47bd7bd9fd0b88cfb4a1f51d8950d3c1b
   labels:
     nuclio.io/project-name: 0956b3ab-98c6-4237-97f2-82e9ee297910
 spec:
   handler: "main:handler"
   runtime: nodejs
   resources: {}
+<<<<<<< HEAD
   image: "nuclio/processor-consumeGarage:latest"
+=======
+  image: "nuclio/processor-consumegarage:latest"
+>>>>>>> 63a0f1d47bd7bd9fd0b88cfb4a1f51d8950d3c1b
   minReplicas: 1
   maxReplicas: 1
   targetCPU: 75
