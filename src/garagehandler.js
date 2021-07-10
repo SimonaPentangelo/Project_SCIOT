@@ -32,7 +32,7 @@ function sendMsg(result) {
 function responseGenerator(val) {
   var garage = parseInt(val.slice(0, 1));
   var someone = parseInt(val.toString().slice(1, 2));
-
+  
   if(garage == 1) {
     return "The garage is closed, I'll open it for you.";
   } else if(garage == 0 && someone == 1) {
@@ -54,7 +54,8 @@ function connectAndWait() {
             "iot/alerts",
             function (msg) {
               console.log(msg.content.toString());
-              //var result = responseGenerator(msg.content.toString());
+              var result = responseGenerator(msg.content.toString());
+              console.log(result);
               //sendMsg(result);
             },
             { noAck: true }
