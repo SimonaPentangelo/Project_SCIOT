@@ -1,0 +1,31 @@
+metadata:
+  name: consumesafety
+  labels:
+    nuclio.io/project-name: 0956b3ab-98c6-4237-97f2-82e9ee297910
+spec:
+  handler: "main:handler"
+  runtime: nodejs
+  resources: {}
+  image: "nuclio/processor-consumesafety:latest"
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPU: 75
+  triggers:
+    SafetyTrigger:
+      class: ""
+      kind: mqtt
+      url: "guest:guest@192.168.1.10:1883"
+      attributes:
+        subscriptions:
+          - qos: 0
+            topic: iot/sensors/infoSafety
+  build:
+    functionSourceCode: dmFyIGFtcXAgPSByZXF1aXJlKCJhbXFwbGliIik7DQoNCmZ1bmN0aW9uIHNlbmRfc2FmZXR5KG1zZykgew0KICB2YXIgcSA9ICJpb3Qvc2FmZXR5IjsNCiAgYW1xcA0KICAgIC5jb25uZWN0KCJhbXFwOi8vZ3Vlc3Q6Z3Vlc3RAMTkyLjE2OC4xLjEwOjU2NzIiKQ0KICAgIC50aGVuKGZ1bmN0aW9uIChjb25uKSB7DQogICAgICByZXR1cm4gY29ubg0KICAgICAgICAuY3JlYXRlQ2hhbm5lbCgpDQogICAgICAgIC50aGVuKGZ1bmN0aW9uIChjaCkgew0KICAgICAgICAgIHZhciBvayA9IGNoLmFzc2VydFF1ZXVlKHEsIHsgZHVyYWJsZTogZmFsc2UgfSk7DQogICAgICAgICAgcmV0dXJuIG9rLnRoZW4oZnVuY3Rpb24gKF9xb2spIHsNCiAgICAgICAgICAgIGNoLnNlbmRUb1F1ZXVlKHEsIEJ1ZmZlci5mcm9tKG1zZykpOw0KICAgICAgICAgICAgY29uc29sZS5sb2coIiBbeF0gU2VudCAnJXMnIiwgbXNnKTsNCiAgICAgICAgICAgIHJldHVybiBjaC5jbG9zZSgpOw0KICAgICAgICAgIH0pOw0KICAgICAgICB9KQ0KICAgICAgICAuZmluYWxseShmdW5jdGlvbiAoKSB7DQogICAgICAgICAgY29ubi5jbG9zZSgpOw0KICAgICAgICB9KTsNCiAgICB9KQ0KICAgIC5jYXRjaChjb25zb2xlLndhcm4pOw0KfQ0KDQpmdW5jdGlvbiBiaW4yc3RyaW5nKGFycmF5KSB7DQogIHZhciByZXN1bHQgPSAiIjsNCiAgZm9yICh2YXIgaSA9IDA7IGkgPCBhcnJheS5sZW5ndGg7ICsraSkgew0KICAgIHJlc3VsdCArPSBTdHJpbmcuZnJvbUNoYXJDb2RlKGFycmF5W2ldKTsNCiAgfQ0KICByZXR1cm4gcmVzdWx0Ow0KfQ0KDQpleHBvcnRzLmhhbmRsZXIgPSBmdW5jdGlvbiAoY29udGV4dCwgZXZlbnQpIHsNCiAgdmFyIF9ldmVudCA9IEpTT04ucGFyc2UoSlNPTi5zdHJpbmdpZnkoZXZlbnQpKTsNCiAgdmFyIF9kYXRhID0gYmluMnN0cmluZyhfZXZlbnQuYm9keS5kYXRhKTsNCiAgdmFyIGluZm9HYXJhZ2UgPSBfZGF0YS50b1N0cmluZygpOw0KDQogIHNlbmRfYWxlcnQoIiIgKyBpbmZvR2FyYWdlKTsNCiAgY29udGV4dC5jYWxsYmFjaygiU2VudCBpbmZvR2FyYWdlOiAiICsgaW5mb0dhcmFnZSk7DQp9Ow0K
+    commands:
+      - 'npm install amqplib'
+    runtimeAttributes:
+      repositories: []
+    codeEntryType: sourceCode
+  platform: {}
+  readinessTimeoutSeconds: 60
+  version: 1
