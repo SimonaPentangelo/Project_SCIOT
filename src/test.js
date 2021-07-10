@@ -30,6 +30,7 @@ function test(msg) {
 }
 
 function connectAndWait() {
+  console.log(process.env);
   amqp
     .connect(`amqp://guest:guest@${process.env.MY_IP}:5672`)
     .then(function (conn) {
@@ -48,7 +49,7 @@ function connectAndWait() {
         });
 
         return ok.then(function (_consumeOk) {
-          console.log(" *** Service status: ON ***");
+          console.log("*** Service status: ON ***");
         });
       });
     })
