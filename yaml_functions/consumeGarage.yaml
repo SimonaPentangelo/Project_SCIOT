@@ -1,5 +1,5 @@
 metadata:
-  name: consumeGarage
+  name: consumegarage
   labels:
     nuclio.io/project-name: 0956b3ab-98c6-4237-97f2-82e9ee297910
 spec:
