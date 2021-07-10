@@ -6,7 +6,7 @@ spec:
   handler: "main:handler"
   runtime: nodejs
   resources: {}
-  image: "nuclio/processor-consumeGarage:latest"
+  image: "nuclio/processor-consumegarage:latest"
   minReplicas: 1
   maxReplicas: 1
   targetCPU: 75
