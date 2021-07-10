@@ -47,16 +47,18 @@ function connectAndWait() {
     .connect(`amqp://guest:guest@${process.env.MY_IP}:5672`)
     .then(function (conn) {
       return conn.createChannel().then(function (ch) {
-        var ok = ch.assertQueue("iot/alerts", { durable: false });
+        var ok = ch.assertQueue("iot/garagedoor", { durable: false });
 
         ok = ok.then(function (_qok) {
           return ch.consume(
-            "iot/alerts",
+            "iot/garagedoor",
             function (msg) {
               console.log(msg.content.toString());
               result = "*** This is an auto-generated message ***\n\n" +
                         "Hi! I'm the garage handler!⚙️\n"; 
-              result += responseGenerator(msg.content.toString());
+              var val = connectAndWait_Two();
+              var string = msg.content.toString + val;
+              result += responseGenerator(string);
               console.log(result);
               sendMsg(result);
             },
@@ -65,7 +67,32 @@ function connectAndWait() {
         });
 
         return ok.then(function (_consumeOk) {
-          console.log("*** Service status: ON ***");
+          console.log("*** First Sensor: ON ***");
+        });
+      });
+    })
+    .catch(console.warn);
+}
+
+function connectAndWait_Two() {
+  amqp
+    .connect(`amqp://guest:guest@${process.env.MY_IP}:5672`)
+    .then(function (conn) {
+      return conn.createChannel().then(function (ch) {
+        var ok = ch.assertQueue("iot/safesensor", { durable: false });
+
+        ok = ok.then(function (_qok) {
+          return ch.consume(
+            "iot/safesensor",
+            function (msg) {
+              return msg.content.toString();
+            },
+            { noAck: true }
+          );
+        });
+
+        return ok.then(function (_consumeOk) {
+          console.log("*** Second Sensor: ON ***");
         });
       });
     })
