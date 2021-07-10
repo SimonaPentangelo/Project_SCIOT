@@ -2,19 +2,22 @@ const amqp = require("amqplib");
 require("dotenv").config({ path: ".env" });
 var nodemailer = require('nodemailer');
 
-/*var transporter = nodemailer.createTransport({
+connectAndWait();
+
+var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'giuseppe9909@gmail.com',
       pass: 'vrkctbdhunaccnwa'
     }
   });
-  
+
+function test(msg) {
   var mailOptions = {
     from: 'giuseppe9909@gmail.com',
     to: 'fabulart99@gmail.com',
-    subject: 'Sending Email using Node.js',
-    text: 'That was easy!'
+    subject: 'Garage Handler Message',
+    text: msg.content.toString()
   };
   
   transporter.sendMail(mailOptions, function(error, info){
@@ -23,7 +26,8 @@ var nodemailer = require('nodemailer');
     } else {
       console.log('Email sent: ' + info.response);
     }
-  });*/
+  });
+}
 
 function connectAndWait() {
   amqp
@@ -36,14 +40,15 @@ function connectAndWait() {
           return ch.consume(
             "iot/alerts",
             function (msg) {
-              waitForMessage(msg);
+              test(msg);
+              console.log(msg.content.toString())
             },
             { noAck: true }
           );
         });
 
         return ok.then(function (_consumeOk) {
-          console.log(" *** Telegram Bot Started! ***");
+          console.log(" *** Service status: ON ***");
         });
       });
     })
