@@ -1,12 +1,12 @@
 metadata:
-  name: sendrandomhumidity
+  name: sendGarage
   labels:
     nuclio.io/project-name: 0956b3ab-98c6-4237-97f2-82e9ee297910
 spec:
   handler: "main:handler"
   runtime: nodejs
   resources: {}
-  image: "nuclio/processor-sendrandomhumidity:latest"
+  image: "nuclio/processor-sendGarage:latest"
   minReplicas: 1
   maxReplicas: 1
   targetCPU: 75
