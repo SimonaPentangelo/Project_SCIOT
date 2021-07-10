@@ -30,7 +30,7 @@ function test(msg) {
 }
 
 function connectAndWait() {
-  console.log(process.env);
+  //console.log(process.env);
   amqp
     .connect(`amqp://guest:guest@${process.env.MY_IP}:5672`)
     .then(function (conn) {
@@ -42,7 +42,7 @@ function connectAndWait() {
             "iot/alerts",
             function (msg) {
               test(msg);
-              console.log(msg.content.toString())
+              console.log(msg.content)
             },
             { noAck: true }
           );
