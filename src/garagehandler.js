@@ -9,8 +9,8 @@ connectAndWait_Two();
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'progettosciot@gmail.com',
-      pass: 'dbvqvoaydifcxprp'
+      user: 'INSERT_YOUR_SENDER_EMAIL,
+      pass: 'INSERT_YOUR_PASSWORD_FOR_APP'
     }
   });
 
