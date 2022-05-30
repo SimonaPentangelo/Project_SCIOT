@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
 
 function sendMsg(result) {
   var mailOptions = {
-    from: 'progettosciot@gmail.com',
+    from: 'EMAIL_SENDER',
     to: 'INSERT_YOUR_EMAIL',
     subject: 'Garage Handler Message',
     text: result
